@@ -1,9 +1,19 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Button from "./Button";
+import { FiShoppingBag } from "react-icons/fi";
+import { getTransition } from "@/utils/getTransition";
 
 const Navbar = () => {
   return (
-    <header className="h-20 fixed top-0 left-0 right-0 bg-light/90 backdrop-blur-lg border-b border-dark/10  z-[100]">
+    <motion.header
+      initial={{ y: "-100%" }}
+      animate={{ y: 0 }}
+      transition={getTransition(0.6)}
+      className="h-20 fixed top-0 left-0 right-0 bg-light/90 backdrop-blur-lg border-b border-dark/10  z-[100]"
+    >
       <div className="wrapper w-full h-full flex justify-between items-center">
         {/* NAV LEFT  */}
         <nav>
@@ -37,11 +47,17 @@ const Navbar = () => {
           </ul>
         </nav>
         {/* NAV RIGHT  */}
-        <nav>
+        <nav className="flex items-center gap-5">
+          <Link href="/cart" className="relative">
+            <FiShoppingBag />
+            <span className="absolute text-xs w-4 h-4 rounded-full bg-dark text-light flex justify-center items-center -right-2 -bottom-2 ">
+              5
+            </span>
+          </Link>
           <Button href="/login" placeholder="Login" color="yellow" />
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 };
 
